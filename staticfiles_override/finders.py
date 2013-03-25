@@ -55,7 +55,12 @@ class StorageOverride:
 class AppDirectoriesFinder(finders.AppDirectoriesFinder):
     def __init__(self, apps=None, overrides=None, *args, **kwargs):
         super(AppDirectoriesFinder, self).__init__(apps=apps, *args, **kwargs)
-        self.overrides = overrides or settings.STATICFILES_OVERRIDES
+        if overrides is None:
+            try:
+                overrides = settings.STATICFILES_OVERRIDES
+            except AttributeError:
+                overrides = {}
+        self.overrides = overrides
 
     def _override_path(self, path):
         if self.overrides:
