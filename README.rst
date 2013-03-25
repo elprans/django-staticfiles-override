@@ -22,7 +22,7 @@ Staticfiles override configuration is simple.  Add the following to settings.py:
       ]
   }
 
-And then replace 
+And then in STATICFILES_FINDERS replace
 
 ::
 
